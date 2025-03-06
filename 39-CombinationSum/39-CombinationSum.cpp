@@ -1,3 +1,4 @@
+// Last updated: 3/6/2025, 10:55:35 PM
 class Solution {
 public:
     void backtrack(vector<int>& candidates, int target, int start,vector<vector<int>>& ans, vector<int>& current ){
@@ -8,7 +9,7 @@ public:
         }
         for(int i=start;i<candidates.size();i++){
             if(candidates[i]>target){
-                break;
+                continue;
             }
             current.push_back(candidates[i]);
             backtrack(candidates, target-candidates[i], i,ans,current );
@@ -16,7 +17,7 @@ public:
         }
     }
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        sort(candidates.begin(), candidates.end());
+        
         vector<vector<int>> ans;
         vector<int> current;
         backtrack(candidates, target, 0, ans, current);
