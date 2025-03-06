@@ -1,28 +1,20 @@
-// Last updated: 3/6/2025, 6:46:39 PM
+// Last updated: 3/6/2025, 6:53:52 PM
 class Solution {
 public:
     vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {
-        vector<int> ans;
-        vector<int> map;
-        int n = grid.size();
-        
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                int current = grid[i][j];
-                if (find(map.begin(), map.end(), current) != map.end()) {
-                    ans.push_back(current);
-                }
-                map.push_back(current);
+        int n=grid.size();
+        int size=n*n;
+        vector<int> freq(size+1,0);
+        int repeated=-1, missing =-1;
+        for(auto row: grid){
+            for(auto num: row){
+                freq[num]++;
             }
         }
-
-        for (int i = 1; i <= (n * n); i++) {
-            if (find(map.begin(), map.end(), i) == map.end()) {
-                ans.push_back(i);
-                break;
-            }
+        for(int i=1;i<=size;i++){
+            if(freq[i]==2) repeated=i;
+            if(freq[i]==0) missing=i;
         }
-
-        return ans;
+        return {repeated, missing};
     }
 };
