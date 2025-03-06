@@ -23,7 +23,7 @@ I aim to solve at least one problem daily. Below is a summary of my progress:
 - **Medium:** [65]
 - **Hard:** [1]
 
-You can track my daily progress in the commit history or by checking the [LeetCode profile]([https://leetcode.com/your-username](https://leetcode.com/u/Lemon_0/)).
+You can track my daily progress in the commit history or by checking the [LeetCode profile](https://leetcode.com/u/Lemon_0/).
 
 ## License
 This repository is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
