@@ -1,12 +1,13 @@
+// Last updated: 3/8/2025, 11:26:09 AM
 class Solution {
 public:
     void getSubsets(vector<int>& nums, int index, vector<vector<int>>& res,
                     vector<int>& current) {
         // base case:
         if (index == nums.size()) {
-            if(find(res.begin(), res.end(),current)==res.end()){
-                res.push_back(current);
-            }
+            
+            res.push_back(current);
+            
             
             return;
         }
@@ -21,6 +22,8 @@ public:
         vector<vector<int>> res;
         vector<int> current;
         getSubsets(nums, 0, res, current);
+        sort(res.begin(),res.end());
+        res.erase(unique(res.begin(), res.end()), res.end());
         return res;
     }
 };
