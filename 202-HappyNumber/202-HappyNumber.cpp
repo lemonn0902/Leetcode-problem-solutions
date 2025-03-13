@@ -1,4 +1,4 @@
-// Last updated: 3/13/2025, 10:50:05 PM
+// Last updated: 3/13/2025, 11:23:06 PM
 class Solution {
 public:
     int sumDigits(int n){
