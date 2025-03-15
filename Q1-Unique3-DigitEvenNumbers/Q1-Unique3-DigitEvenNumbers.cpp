@@ -1,7 +1,7 @@
+// Last updated: 3/15/2025, 8:19:17 PM
 class Solution {
 public:
     int totalNumbers(vector<int>& digits) {
-        int count=0;
         set<int>unique;
         int num=0;
         int n=digits.size();
