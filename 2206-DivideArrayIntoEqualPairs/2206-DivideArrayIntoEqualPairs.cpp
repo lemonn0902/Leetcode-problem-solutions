@@ -1,23 +1,17 @@
-// Last updated: 3/17/2025, 11:23:24 PM
+// Last updated: 3/17/2025, 11:24:09 PM
 class Solution {
 public:
     bool divideArray(vector<int>& nums) {
-        int pairs = nums.size()/2;
-        int ele = nums.size()/pairs;
-        int flag=0;
-        while(!nums.empty()){
-            
-            int e = nums[0];
-            int c= count(nums.begin(), nums.end(), e);
-            if(c == ele || c%ele==0){
-                nums.erase(remove(nums.begin(), nums.end(), e), nums.end());
-            }
-            else {
-                flag=1;
-                break;
+        unordered_map<int, int> freq;
+        for (int num : nums) {
+            freq[num]++;
+        }
+        for (auto& it : freq) {
+            if (it.second % 2 != 0) {
+                return false;
             }
         }
-        if(flag==1) return false;
-        else return true;
+
+        return true;
     }
 };
