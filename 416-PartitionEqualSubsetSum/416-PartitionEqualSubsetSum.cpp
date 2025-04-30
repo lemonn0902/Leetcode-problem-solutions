@@ -1,16 +1,7 @@
-// Last updated: 5/1/2025, 12:35:07 AM
+// Last updated: 5/1/2025, 12:35:30 AM
 class Solution {
 public:
-    // bool f(int index, int target, vector<int>& nums, vector<vector<int>>& dp){
-    //     if(target==0 ) return true;
-    //     if(index==0) return(nums[index]==target);
-    //     if(dp[index][target]!=-1) return dp[index][target];
-    //     int notTake= f(index-1, target, nums, dp);
-    //     int take= false;
-    //     if(target>=nums[index]) take=f(index-1, target-nums[index], nums, dp);
-    //     return dp[index][target] =notTake | take; 
-
-    // }
+    
     bool canPartition(vector<int>& nums) {
         int target=0, total=0;
         int n= nums.size();
