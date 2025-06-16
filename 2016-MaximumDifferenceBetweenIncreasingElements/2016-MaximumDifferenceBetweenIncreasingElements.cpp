@@ -1,4 +1,4 @@
-// Last updated: 6/16/2025, 2:04:31 PM
+// Last updated: 6/16/2025, 2:05:45 PM
 class Solution {
 public:
     int maximumDifference(vector<int>& nums) {
@@ -10,7 +10,6 @@ public:
             int diff= nums[i]-min;
             maxDiff= max(diff, maxDiff);
         }
-        if(maxDiff==0) return -1;
-        return maxDiff;
+        return maxDiff == 0 ? -1 : maxDiff;
     }
 };
