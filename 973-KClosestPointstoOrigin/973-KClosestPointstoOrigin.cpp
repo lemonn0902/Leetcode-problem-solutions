@@ -1,4 +1,4 @@
-// Last updated: 7/2/2025, 12:38:32 AM
+// Last updated: 7/2/2025, 12:39:42 AM
 class Solution {
 public:
     vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
@@ -7,7 +7,7 @@ public:
         for(auto& it: points){
             int x=it[0];
             int y=it[1];
-            int d=x * x + y * y;
+            int d= x*x + y*y;
             pq.push({d, it});
             if(pq.size()>k) pq.pop();
         }
