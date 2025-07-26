@@ -1,4 +1,4 @@
-// Last updated: 7/26/2025, 12:38:30 PM
+// Last updated: 7/26/2025, 12:38:53 PM
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -8,7 +8,7 @@ public:
         }
         for(int i=0;i<nums.size();i++){
             int d= target-nums[i];
-            if(mpp.find(d)!=mpp.end()&& mpp[d]!=i){
+            if(mpp.count(d)&& mpp[d]!=i){
                 return {i,mpp[d]};
             }
         }
