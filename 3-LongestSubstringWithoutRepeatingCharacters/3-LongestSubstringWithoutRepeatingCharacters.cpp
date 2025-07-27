@@ -1,4 +1,4 @@
-// Last updated: 7/27/2025, 11:44:26 PM
+// Last updated: 7/27/2025, 11:44:36 PM
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
@@ -14,7 +14,7 @@ public:
             freq[s[r]]++;
             while(freq[s[r]]>1){
                 freq[s[l]]--;
-                //if(freq[s[r]]==0) freq.erase(s[r]);
+                if(freq[s[r]]==0) freq.erase(s[r]);
                 l++;
             }
             maxAns=max(maxAns, 1+r-l);
