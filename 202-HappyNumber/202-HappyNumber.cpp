@@ -1,25 +1,23 @@
-// Last updated: 7/27/2025, 1:35:11 PM
+// Last updated: 7/27/2025, 2:10:44 PM
 class Solution {
 public:
-    int sumDigits(int n){
+    int square(int n){
         int sum=0;
         while(n>0){
-            int r=n%10;
-            sum+= (r*r);
+            sum=sum+(pow(n%10,2));
             n=n/10;
         }
         return sum;
     }
     bool isHappy(int n) {
-        unordered_set<int> seen;
-        while(n!=1 && seen.find(n)==seen.end()){
-            seen.insert(n);
-            n=sumDigits(n);
+        int slow=n;
+        int fast=n;
+        do{
+            slow= square(slow);
+            fast= square(square(fast));
 
-        }
-        if(n==1)
-        return true;
-        else 
-        return false;
+        } while(slow!=fast);
+        return slow==1;
+
     }
 };
