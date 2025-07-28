@@ -1,4 +1,4 @@
-// Last updated: 7/28/2025, 2:20:02 PM
+// Last updated: 7/28/2025, 2:20:11 PM
 class Solution {
 public:
     string minWindow(string s, string t) {
