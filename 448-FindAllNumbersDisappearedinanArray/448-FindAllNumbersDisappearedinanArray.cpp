@@ -1,15 +1,17 @@
-// Last updated: 7/29/2025, 12:48:44 PM
+// Last updated: 7/29/2025, 12:59:20 PM
 class Solution {
 public:
     vector<int> findDisappearedNumbers(vector<int>& nums) {
-        vector<int> res;
-        unordered_map<int,int> mpp;
-        
         for(int i=0;i<nums.size();i++){
-            mpp[nums[i]]++;
+            while(nums[i]!=nums[nums[i]-1]){
+                int temp=nums[i];
+                nums[i]=nums[temp-1];
+                nums[temp-1]=temp;
+            }
         }
-        for(int i=1;i<=nums.size();i++){
-            if(mpp[i]==0) res.push_back(i);
+        vector<int> res;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]!=i+1) res.push_back(i+1);
         }
         return res;
     }
