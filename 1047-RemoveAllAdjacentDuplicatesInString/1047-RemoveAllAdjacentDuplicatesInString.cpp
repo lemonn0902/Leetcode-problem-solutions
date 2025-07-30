@@ -1,9 +1,9 @@
-// Last updated: 7/30/2025, 1:33:05 PM
+// Last updated: 7/30/2025, 1:33:21 PM
 class Solution {
 public:
     string removeDuplicates(string s) {
-        if(s=="") return "";
-        if(s.size()==1) return s;
+        // if(s=="") return "";
+        // if(s.size()==1) return s;
         string res="";
         int n= s.size();
         for(int i=0;i<n;i++){
