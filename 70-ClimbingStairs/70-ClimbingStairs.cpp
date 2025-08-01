@@ -1,14 +1,17 @@
-// Last updated: 4/18/2025, 11:34:49 PM
+// Last updated: 8/1/2025, 11:38:18 AM
 class Solution {
 public:
     int climbStairs(int n) {
-        if(n==0 || n==1) return 1;
-        int prev1=1, prev2=1, curr=0;
-        for(int i=2;i<=n;i++){
-            curr=prev1+prev2;
-            prev2=prev1;
-            prev1=curr;
+        if (n == 0 || n == 1) return 1;
+        
+        vector<int> dp(n + 1);
+        dp[0] = 1;
+        dp[1] = 1;
+
+        for (int i = 2; i <= n; ++i) {
+            dp[i] = dp[i - 1] + dp[i - 2];
         }
-        return prev1;
+
+        return dp[n];
     }
 };
