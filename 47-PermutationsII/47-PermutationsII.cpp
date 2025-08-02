@@ -1,11 +1,11 @@
-// Last updated: 8/3/2025, 1:33:50 AM
+// Last updated: 8/3/2025, 1:37:20 AM
 class Solution {
 public:
-    void backtrack(vector<int>& nums,vector<int> perm,vector<bool> used,set<vector<int>>& res){
+    void backtrack(vector<int>& nums,vector<int> perm,vector<bool> used,vector<vector<int>>& res){
         int n=nums.size();
         //base case
-        if(perm.size()==n){
-            res.insert(perm);
+        if (perm.size() == n && (find(res.begin(), res.end(), perm) == res.end())) {
+            res.push_back(perm);
             return;
         }
         for(int i=0;i<n;i++){
@@ -19,10 +19,10 @@ public:
     }
     vector<vector<int>> permuteUnique(vector<int>& nums) {
         vector<int> perm;
-        set<vector<int>> res;
+        vector<vector<int>> res;
         int n=nums.size();
         vector<bool> used(n, false);
         backtrack(nums, perm, used, res);
-        return vector<vector<int>>(res.begin(), res.end());
+        return res;
     }
 };
