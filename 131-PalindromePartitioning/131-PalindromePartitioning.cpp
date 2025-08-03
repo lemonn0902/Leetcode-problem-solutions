@@ -1,38 +1,33 @@
+// Last updated: 8/4/2025, 12:47:26 AM
 class Solution {
 public:
-    bool isPalindrome(string word){
-        string rev="";
-        for(int i=word.size()-1;i>=0;i--){
-            rev=rev+word[i];
+    bool isPal(string s,int l,int r){
+        while (l < r) {
+            if (s[l++] != s[r--]) return false;
         }
-        if(rev==word)
         return true;
-        return false;
     }
-    void backtrack(string& s, vector<vector<string>>& res, vector<string>& current, string part, int start){
-        //base case:
+    void backtrack(string s, vector<string> curr, vector<vector<string>>& res,int start){
+        int n=s.size();
         if(start==s.size()){
-            if(part.empty()){
-                res.push_back(current);
-            }
-            
-            
+            res.push_back(curr);
             return;
         }
-        part += s[start];
-        if(isPalindrome(part)){
-            current.push_back(part);
-            backtrack(s,res, current, "", start+1);
-            current.pop_back();
-        } 
-        backtrack(s,res,current,part, start+1);
+        for(int i=start;i<n;i++){
+            if(isPal(s,start,i)){
+                curr.push_back(s.substr(start,i-start+1));
+                backtrack(s,curr,res,i+1);
+                curr.pop_back();
+            }
+        }
+        
 
     }
     vector<vector<string>> partition(string s) {
+        int n=s.size();
+        vector<string> curr;
         vector<vector<string>> res;
-        vector<string> current;
-        backtrack(s, res, current, "", 0);
-
+        backtrack(s,curr,res,0);
         return res;
     }
 };
