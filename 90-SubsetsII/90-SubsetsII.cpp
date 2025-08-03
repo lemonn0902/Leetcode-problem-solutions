@@ -1,29 +1,23 @@
-// Last updated: 3/8/2025, 11:26:09 AM
+// Last updated: 8/3/2025, 9:48:43 PM
 class Solution {
 public:
-    void getSubsets(vector<int>& nums, int index, vector<vector<int>>& res,
-                    vector<int>& current) {
-        // base case:
-        if (index == nums.size()) {
-            
-            res.push_back(current);
-            
-            
+    void backtrack(int index, vector<int>& nums, vector<int> sub, vector<vector<int>>& res ){
+        if(index==nums.size()){
+            res.push_back(sub);
             return;
         }
-
-        current.push_back(nums[index]);
-        getSubsets(nums, index + 1, res, current);
-        current.pop_back();
-        getSubsets(nums, index + 1,  res, current);
+        
+        sub.push_back(nums[index]);
+        backtrack(index+1,nums,sub,res);
+        sub.pop_back();
+        while(index+1<nums.size()&& nums[index]==nums[index+1]) index++;
+        backtrack(index+1,nums,sub,res);
     }
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         sort(nums.begin(), nums.end());
+        vector<int> sub;
         vector<vector<int>> res;
-        vector<int> current;
-        getSubsets(nums, 0, res, current);
-        sort(res.begin(),res.end());
-        res.erase(unique(res.begin(), res.end()), res.end());
+        backtrack(0,nums,sub, res);
         return res;
     }
 };
