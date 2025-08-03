@@ -1,22 +1,22 @@
+// Last updated: 8/3/2025, 6:23:58 PM
 class Solution {
 public:
-    void backtrack(int start, int n, int k, vector<vector<int>>& res, vector<int>& current){
-        //base case:
-        if(current.size()==k){
-            res.push_back(current);
+    void backtrack(int start,int n, int k, vector<int> curr,vector<vector<int>>& res){
+        if(curr.size()==k){
+            res.push_back(curr);
             return;
         }
-        for(int num= start;num<=n;num++){
-            current.push_back(num);
-            backtrack(num+1,n,k,res,current);
-            current.pop_back();
+        for(int i=start;i<=n;i++){
+            
+            curr.push_back(i);
+            backtrack(i+1,n,k,curr,res);
+            curr.pop_back();
         }
-
     }
     vector<vector<int>> combine(int n, int k) {
+        vector<int> curr;
         vector<vector<int>> res;
-        vector<int> current;
-        backtrack(1,n, k, res, current);
+        backtrack(1,n, k, curr, res);
         return res;
     }
 };
