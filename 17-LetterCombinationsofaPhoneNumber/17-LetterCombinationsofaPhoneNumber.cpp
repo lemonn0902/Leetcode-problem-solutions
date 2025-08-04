@@ -1,27 +1,40 @@
+// Last updated: 8/4/2025, 4:39:44 PM
 class Solution {
 public:
-    void backtrack(string& digits,vector<string>& res,int index, string& current, vector<string>& phoneMap ){
-        //base case:
-        if(index==digits.size()){
-            res.push_back(current);
+    unordered_map<char, string> map={
+        {'2',"abc"},
+        {'3',"def"},
+        {'4',"ghi"},
+        {'5',"jkl"},
+        {'6',"mno"},
+        {'7',"pqrs"},
+        {'8',"tuv"},
+        {'9',"wxyz"},
+        
+    };
+    void backtrack(string digits, vector<string>& res,int index, string curr){
+        int n=digits.size();
+        if(curr.size()==n){
+            res.push_back(curr);
             return;
         }
-        string letters=phoneMap[digits[index]-'0']; //'2','3'
-        for(char letter : letters ){
-            current.push_back(letter);
-            backtrack(digits, res, index+1, current, phoneMap);
-            current.pop_back();
-        }
-
+        char dig=digits[index]; 
+        const string& choices = map[dig];
+        for(char ch:choices){
+            
+            
+            
+                curr.push_back(ch);
+                backtrack(digits,res,index+1,curr);
+                curr.pop_back();
+            }
+        
 
     }
     vector<string> letterCombinations(string digits) {
-        if(digits.size()==0)
-        return {};
+        if(digits=="") return {};
         vector<string> res;
-        string current;
-        vector<string> phoneMap={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
-        backtrack(digits, res,0, current,phoneMap);
+        backtrack(digits, res,0,"");
         return res;
     }
 };
