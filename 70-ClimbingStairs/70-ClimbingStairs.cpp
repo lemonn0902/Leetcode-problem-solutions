@@ -1,21 +1,22 @@
-// Last updated: 8/1/2025, 11:40:16 AM
+// Last updated: 8/5/2025, 7:07:15 PM
 class Solution {
 public:
-    int f(int n, int i, vector<int>& dp){
-        
-        //base case
-        if(i==n) return 1;
-        if(i>n) return 0;
-        if(dp[i]!=-1) return dp[i];
-        //climb one step
-        int x=f(n,i+1,dp);
-        //climb 2 steps
-        int y=f(n,i+2,dp);
-        dp[i]= x+y;
-        return dp[i];
+    int f(int index, vector<int>& dp){
+        if(index==0||index==1){
+            return 1;
+        }
+        if(dp[index]!=-1) return dp[index];
+        //take 1 step
+        int p=f(index-1,dp);
+        //take 2 steps
+        int r=f(index-2,dp);
+        dp[index]=p+r;
+        return dp[index];
+
+
     }
     int climbStairs(int n) {
         vector<int> dp(n+1,-1);
-        return f(n,0,dp);
+        return f(n,dp);
     }
 };
