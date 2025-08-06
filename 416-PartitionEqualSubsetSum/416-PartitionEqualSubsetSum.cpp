@@ -1,26 +1,25 @@
-// Last updated: 5/12/2025, 12:48:23 AM
+// Last updated: 8/6/2025, 2:23:30 PM
 class Solution {
 public:
-    bool f(int index, vector<int>& nums, int target , vector<vector<int>>& dp){
+    bool f(vector<int>& nums,int index, int target, vector<vector<int>>& dp){
         if(target==0) return true;
-        if(index==0) return nums[0]==target;
+        if(index==0) return nums[index]==target;
         if(dp[index][target]!=-1) return dp[index][target];
-        bool notTake = f(index-1, nums, target, dp);
-        bool Take= false;
-        if(target>= nums[index]){
-            Take= f(index-1, nums, target-nums[index], dp);
-        }
-        return dp[index][target]= Take | notTake;
+        bool take=false;
+        if(nums[index]<=target) take=f(nums,index-1, target-nums[index],dp);
+        bool notTake=f(nums,index-1,target,dp);
+        return dp[index][target]=take|notTake;
     }
     bool canPartition(vector<int>& nums) {
-        int target =0, total=0;
+        int tot=0;
+        int target=0;
+        for(int i=0;i<nums.size();i++){
+            tot+=nums[i];
+        }
+        target=tot/2;
         int n=nums.size();
-        
-        for(int i=0;i<n;i++)
-        total+=nums[i];
-        target=total/2;
-        vector<vector<int>> dp(n, vector<int>(target+1, -1));
-        if(total%2!=0) return false;
-        else return f(n-1, nums, target, dp);
+        if(tot%2!=0) return false;
+        vector<vector<int>> dp(n,vector<int>(target+1,-1));
+        return f(nums,n-1,target,dp);
     }
 };
