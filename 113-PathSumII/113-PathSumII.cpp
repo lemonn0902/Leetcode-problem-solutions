@@ -1,4 +1,4 @@
-// Last updated: 8/7/2025, 8:41:21 PM
+// Last updated: 8/7/2025, 8:54:25 PM
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -12,7 +12,7 @@
  */
 class Solution {
 public:
-    void solve(TreeNode* root, int target, vector<vector<int>>& res, vector<int> curr, int sum){
+    void solve(TreeNode* root, int target, vector<vector<int>>& res, vector<int>& curr, int& sum){
         if(root==NULL) return;
         sum=sum+root->val;
         curr.push_back(root->val);
@@ -21,17 +21,20 @@ public:
                 res.push_back(curr);
                 
             }
-            return;
-        }
+            
+        }else{
         
         solve(root->left, target,res,curr, sum);
         solve(root->right, target, res, curr, sum);
+        }
+        sum=sum-root->val;
+        curr.pop_back();
     }
     vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
         vector<vector<int>> res;
         vector<int> curr;
-        
-        solve(root, targetSum, res, curr, 0 );
+        int sum=0;
+        solve(root, targetSum, res, curr, sum );
         return res;
     }
 };
