@@ -1,4 +1,4 @@
-// Last updated: 8/11/2025, 12:33:47 AM
+// Last updated: 8/11/2025, 12:34:57 AM
 class Solution {
 public:
     bool checkPerfectNumber(int num) {
@@ -6,7 +6,6 @@ public:
         for(int i=1;i<num;i++){
             if(num%i==0) sum+=i;
         }
-        if(sum==num) return true;
-        return false;
+        return sum==num;
     }
 };
