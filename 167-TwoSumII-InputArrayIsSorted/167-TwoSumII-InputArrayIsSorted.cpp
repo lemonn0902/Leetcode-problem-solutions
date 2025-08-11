@@ -1,4 +1,4 @@
-// Last updated: 7/26/2025, 12:43:59 PM
+// Last updated: 8/11/2025, 12:20:17 PM
 class Solution {
 public:
     vector<int> twoSum(vector<int>& numbers, int target) {
@@ -7,15 +7,11 @@ public:
         int r=n-1;
         while(l<r){
             int sum=numbers[l]+numbers[r];
-            if(sum>target){
-                r--;
-            }
+            if(sum==target) return{l+1,r+1};
             else if(sum<target){
                 l++;
             }
-            else{
-                return {l+1, r+1};
-            }
+            else r--;
         }
         return {};
     }
