@@ -1,27 +1,27 @@
-// Last updated: 8/11/2025, 11:07:03 PM
-#include <algorithm> // for std::transform
-#include <cctype>
+// Last updated: 8/11/2025, 11:10:38 PM
 class Solution {
 public:
     bool isPalindrome(string s) {
-        string org="";
-        string rev="";
-        for(auto it:s){
-            if((it>='a'&&it<='z')||(it>='A'&&it<='Z')||(it>='0'&&it<='9')){
-                org+=it;
+        for(char& c: s){
+            c=tolower(c);
+        }
+        int n=s.size();
+        int l=0;
+        int r=n-1;
+        while(l<r){
+            
+            if(!isalnum(s[l])) {
+                l++;
+                continue;
             }
-        }
-        for(int i=0;i<org.size();i++){
-            char curr=org[i];
-            if(curr>='A'&& curr<='Z'){
-                org[i]=curr-'A'+'a';
+            if(!isalnum(s[r])) {
+                r--;
+                continue;
             }
+            if(s[l]!=s[r]) return false;
+            l++;
+            r--;
         }
-        for(int i=org.size()-1;i>=0;i--){
-            rev+=org[i];
-        }
-        if(rev!=org)
-        return false;
         return true;
     }
 };
