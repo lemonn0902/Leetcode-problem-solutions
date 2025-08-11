@@ -1,4 +1,4 @@
-// Last updated: 8/11/2025, 10:49:41 PM
+// Last updated: 8/11/2025, 10:50:08 PM
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -23,7 +23,7 @@ public:
         vector<int> ans;
         if(root==NULL) return false;
         traverse(root, ans);
-        sort(ans.begin(), ans.end());
+        //sort(ans.begin(), ans.end());
         int n=ans.size();
         int l=0;
         int r=n-1;
