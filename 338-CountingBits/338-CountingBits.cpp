@@ -1,4 +1,4 @@
-// Last updated: 8/13/2025, 7:15:56 PM
+// Last updated: 8/13/2025, 7:16:14 PM
 class Solution {
 public:
     int countBin(int no){
