@@ -1,4 +1,4 @@
-// Last updated: 8/13/2025, 7:41:22 PM
+// Last updated: 8/13/2025, 7:41:53 PM
 class Solution {
 public:
     string longestWord(vector<string>& words) {
@@ -6,9 +6,9 @@ public:
         string ans;
         unordered_set<string> st;
         for(auto word: words){
-            if(word.size()==1||st.find(word.substr(0, word.size() - 1)) != st.end()){
+            if(word.size()==1||st.find(word.substr(0, word.size()-1))!=st.end()){
                 st.insert(word);
-                if(word.size()>ans.size()||(word.size() == ans.size() && word < ans)){
+                if(word.size()>ans.size()||(word.size()== ans.size() &&word<ans)){
                 ans=word;
             }
             }
