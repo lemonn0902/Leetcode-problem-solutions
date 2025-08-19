@@ -1,10 +1,11 @@
-// Last updated: 8/19/2025, 3:23:45 PM
+// Last updated: 8/19/2025, 3:24:49 PM
 class Solution {
 public:
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
         int m=image.size();
         int n=image[0].size();
         int startColor = image[sr][sc];
+        if(startColor == color) return image;
         vector<vector<int>> vis(m, vector<int>(n,0));
         queue<pair<int,int>> q;
         q.push({sr,sc});
