@@ -1,11 +1,10 @@
-// Last updated: 8/20/2025, 12:35:16 AM
+// Last updated: 8/20/2025, 12:35:29 AM
 class Solution {
 public:
     int longestContinuousSubstring(string s) {
         int len=s.size();
         int maxAns=1;
         int curr=1; 
-        string t="abcdefghijklmnopqrstuvwxyz";
         for(int i=1;i<len;i++){
             if(s[i]==s[i-1]+1){
                 curr++;
