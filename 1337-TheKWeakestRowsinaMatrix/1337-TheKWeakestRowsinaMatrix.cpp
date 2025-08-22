@@ -1,4 +1,4 @@
-// Last updated: 8/22/2025, 12:07:34 PM
+// Last updated: 8/22/2025, 12:07:44 PM
 class Solution {
 public:
     vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
@@ -11,7 +11,7 @@ public:
             int count=0;
             for(int j=0;j<n;j++){
                 if(mat[i][j]==1) count++;
-                else break;
+                //else break;
             }
             pq.push({count,i});
         }
