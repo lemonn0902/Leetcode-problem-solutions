@@ -1,24 +1,23 @@
-// Last updated: 8/28/2025, 3:27:32 PM
+// Last updated: 8/28/2025, 3:35:37 PM
 class Solution {
 public:
     int maxScore(vector<int>& cardPoints, int k) {
+        int tot=0;
         int n=cardPoints.size();
-        
-        int leftSum=0;
-        int rightSum=0;
-        int maxSum=0;
-        
-        for(int i=0;i<k;i++){
-            leftSum+=cardPoints[i];
+        for(int n:cardPoints){
+            tot+=n;
         }
-        maxSum=leftSum;
-        int idx=n-1;
-        for(int i=k-1;i>=0;i--){
-            leftSum=leftSum-cardPoints[i];
-            rightSum=rightSum+cardPoints[idx];
-            idx--;
-            maxSum=max(maxSum, leftSum+rightSum);
+        int left=n-k;
+        int curr=0;
+        for(int i=0;i<left;i++){
+            curr=curr+cardPoints[i];
         }
-        return maxSum;
+        int minAns=curr;
+        for(int i=left;i<n;i++){
+            curr=curr+cardPoints[i]-cardPoints[i-left];
+            minAns=min(curr,minAns);
+        }
+        return tot-minAns;
+
     }
 };
