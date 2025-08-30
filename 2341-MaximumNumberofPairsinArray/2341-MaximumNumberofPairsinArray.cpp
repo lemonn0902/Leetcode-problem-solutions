@@ -1,15 +1,15 @@
-// Last updated: 8/30/2025, 5:03:45 PM
+// Last updated: 8/30/2025, 5:04:06 PM
 class Solution {
 public:
     vector<int> numberOfPairs(vector<int>& nums) {
         unordered_map<int,int> freq;
         int numRemoved=0;
         int n=nums.size();
-        if(n<=1) return {0,1};
-        if(n==2){
-            if(nums[0]!=nums[1]) return {0,2};
-            else return {1,0};
-        }
+        // if(n<=1) return {0,1};
+        // if(n==2){
+        //     if(nums[0]!=nums[1]) return {0,2};
+        //     else return {1,0};
+        // }
         for(int n:nums){
             freq[n]++;
         }
