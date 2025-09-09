@@ -1,10 +1,11 @@
-// Last updated: 7/27/2025, 2:10:44 PM
+// Last updated: 9/9/2025, 10:42:20 PM
 class Solution {
 public:
-    int square(int n){
+    int sq(int n){
         int sum=0;
-        while(n>0){
-            sum=sum+(pow(n%10,2));
+        while(n!=0){
+            int r=n%10;
+            sum=sum+(r*r);
             n=n/10;
         }
         return sum;
@@ -13,11 +14,9 @@ public:
         int slow=n;
         int fast=n;
         do{
-            slow= square(slow);
-            fast= square(square(fast));
-
+            slow=sq(slow);
+            fast=sq(sq(fast));
         } while(slow!=fast);
         return slow==1;
-
     }
 };
