@@ -1,4 +1,4 @@
-// Last updated: 8/13/2025, 12:13:14 PM
+// Last updated: 9/14/2025, 6:12:15 PM
 class Solution {
 public:
     int eraseOverlapIntervals(vector<vector<int>>& intervals) {
