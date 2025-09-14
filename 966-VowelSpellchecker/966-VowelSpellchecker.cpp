@@ -1,58 +1,48 @@
-// Last updated: 9/14/2025, 1:43:26 PM
+// Last updated: 9/14/2025, 1:44:52 PM
+#include <bits/stdc++.h>
+using namespace std;
+
 class Solution {
 public:
-    string wild(const string& word) {
-        string res = word;
-        for (char &c : res) {
-            c = tolower(c);
-            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
-                c = '*';
-        }
-        return res;
-    }
-
     vector<string> spellchecker(vector<string>& wordlist, vector<string>& queries) {
-        vector<string> res;
-
-        unordered_set<string> exactWords(wordlist.begin(), wordlist.end());
-        unordered_map<string, string> caseInsensitiveMap;
+        unordered_set<string> exact(wordlist.begin(), wordlist.end());
+        unordered_map<string, string> caseMap;
         unordered_map<string, string> vowelMap;
 
-        for (const string& word : wordlist) {
-            string lowerWord = word;
-            transform(lowerWord.begin(), lowerWord.end(), lowerWord.begin(), ::tolower);
-
-            if (caseInsensitiveMap.find(lowerWord) == caseInsensitiveMap.end())
-                caseInsensitiveMap[lowerWord] = word;
-
-            string wildWord = wild(lowerWord);
-            if (vowelMap.find(wildWord) == vowelMap.end())
-                vowelMap[wildWord] = word;
+        for (string w : wordlist) {
+            string lower = toLower(w);
+            string devowel = deVowel(lower);
+            if (!caseMap.count(lower)) caseMap[lower] = w;
+            if (!vowelMap.count(devowel)) vowelMap[devowel] = w;
         }
+        vector<string> result;
+        for (string q : queries) {
+            if (exact.count(q)) {
+                result.push_back(q);
+            } else {
+                string lower = toLower(q);
+                string devowel = deVowel(lower);
 
-        for (const string& query : queries) {
-            if (exactWords.count(query)) {
-                res.push_back(query);
-                continue;
+                if (caseMap.count(lower)) result.push_back(caseMap[lower]);
+                else if (vowelMap.count(devowel)) result.push_back(vowelMap[devowel]);
+                else result.push_back("");
             }
-
-            string queryLower = query;
-            transform(queryLower.begin(), queryLower.end(), queryLower.begin(), ::tolower);
-
-            if (caseInsensitiveMap.count(queryLower)) {
-                res.push_back(caseInsensitiveMap[queryLower]);
-                continue;
-            }
-
-            string queryWild = wild(queryLower);
-            if (vowelMap.count(queryWild)) {
-                res.push_back(vowelMap[queryWild]);
-                continue;
-            }
-
-            res.push_back("");
         }
-
-        return res;
+        return result;
+    }
+private:
+    string toLower(string s) {
+        for (char &c : s) c = tolower(c);
+        return s;
+    }
+    string deVowel(string s) {
+        for (char &c : s) {
+            if (isVowel(c)) c = '*';
+        }
+        return s;
+    }
+    bool isVowel(char c) {
+        c = tolower(c);
+        return c=='a'||c=='e'||c=='i'||c=='o'||c=='u';
     }
 };
