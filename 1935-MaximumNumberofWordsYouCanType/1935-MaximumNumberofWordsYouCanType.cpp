@@ -1,19 +1,30 @@
-// Last updated: 9/15/2025, 12:56:47 PM
+// Last updated: 9/15/2025, 1:01:57 PM
 class Solution {
 public:
     int canBeTypedWords(string text, string brokenLetters) {
         int res=0;
-        istringstream iss(text);
-        string word;
-        while(iss>>word){
-            bool f=true;
-            for(char c:brokenLetters){
-                if(word.find(c)!=string::npos){
-                    f=false;
-                    break;
+       
+        text=text+' ';
+         int n=text.size();
+        string temp="";
+        for(int i=0;i<n;i++){
+            if(text[i]==' '){
+                bool f=true;
+                for(int j=0;j<brokenLetters.size();j++){
+                    if(temp.find(brokenLetters[j])!=string::npos){
+                        f=false;
+                        break;
+                    }
                 }
+                if(f) res++;
+
+                temp="";
             }
-            if(f) res++;
+            else{
+                temp+=text[i];
+            }
+            
+            
         }
         return res;
     }
