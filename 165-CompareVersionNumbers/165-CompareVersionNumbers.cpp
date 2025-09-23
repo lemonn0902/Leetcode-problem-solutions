@@ -1,4 +1,4 @@
-// Last updated: 9/23/2025, 12:55:50 PM
+// Last updated: 9/23/2025, 12:56:38 PM
 class Solution {
 public:
     int compareVersion(string version1, string version2) {
@@ -17,10 +17,10 @@ public:
                 j++;
             } 
             j++;
-            int v1 = n1.empty() ? 0 : stoi(n1);
-            int v2 = n2.empty() ? 0 : stoi(n2);
-            if (v1 > v2) return 1;
-            if (v1 < v2) return -1;
+            int v1=n1.empty()?0:stoi(n1);
+            int v2=n2.empty()?0:stoi(n2);
+            if (v1>v2) return 1;
+            if (v1<v2) return -1;
        }
        
        return 0;
