@@ -1,23 +1,24 @@
-// Last updated: 8/3/2025, 12:05:24 AM
+// Last updated: 9/28/2025, 1:02:27 AM
 class Solution {
 public:
-    void backtrack(int o,int c, string r, vector<string>& res){
-        //base case
-        if(o==0&&c==0){
-            res.push_back(r);
+    void backtrack(vector<string>& res, string curr, int open, int closed, int n){
+        if(open==closed&&open==n){
+            res.push_back(curr);
             return;
         }
-        //add '('
-        if(o>0) backtrack(o-1,c,r+"(", res);
-        //add ')'
-        if(c-1>=o) backtrack(o,c-1,r+")", res );
+        if(open<n) {
+        backtrack(res, curr+"(", open+1,closed,n);}
+        if(closed<open){
+            
+            backtrack(res,curr+")",open,closed+1,n);
+        }
+
     }
     vector<string> generateParenthesis(int n) {
-        int open=n;
-        int close=n;
-        string r="";
         vector<string> res;
-        backtrack(open, close, r,res);
+        string curr="";
+        int o=0, c=0;
+        backtrack(res, curr, o,c,n);
         return res;
     }
 };
