@@ -1,11 +1,19 @@
-// Last updated: 8/17/2025, 2:57:12 PM
+// Last updated: 10/27/2025, 8:03:35 PM
 class Solution {
 public:
     int peakIndexInMountainArray(vector<int>& arr) {
         int n= arr.size();
-        for(int i=0;i<n-1;i++){
-            if(arr[i+1]<arr[i]) return i;
+        int s=0;
+        int e=n-1;
+        while(s<e){
+            int m=s+(e-s)/2;
+            if(arr[m]>arr[m+1]){
+                e=m;
+            }
+            else{
+                s=m+1;
+            }
         }
-        return n-1;
+        return s;
     }
 };
