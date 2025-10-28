@@ -1,10 +1,10 @@
-// Last updated: 10/28/2025, 10:53:35 PM
+// Last updated: 10/28/2025, 10:53:56 PM
 class Solution {
 public:
     int mySqrt(int x) {
         int low=0;
         int high=x;
-        long long ans;
+        int ans;
         while(low<=high){
             long long mid=low+(high-low)/2;
             if(mid*mid==x) return mid;
