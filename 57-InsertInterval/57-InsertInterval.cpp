@@ -1,25 +1,19 @@
-// Last updated: 11/8/2025, 8:59:00 PM
+// Last updated: 11/8/2025, 10:23:47 PM
 class Solution {
 public:
-    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
-        sort(intervals.begin(), intervals.end());
-        vector<vector<int>> res;
-        int i=0;
-        int n=intervals.size();
-        while(i<n&&intervals[i][1]<newInterval[0]){
-            res.push_back(intervals[i]);
-            i++;
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> res(n,0);
+        vector<int> prefix(n,1);
+        vector<int> suffix(n,1);
+        for(int i=1;i<n;i++){
+            prefix[i]=prefix[i-1]*nums[i-1];
         }
-        
-        while(i<n && intervals[i][0]<=newInterval[1]){
-             newInterval[0]=min(newInterval[0], intervals[i][0]);
-             newInterval[1]=max(newInterval[1], intervals[i][1]);
-            i++;
+        for(int i=n-2;i>=0;i--){
+            suffix[i]=suffix[i+1]*nums[i+1];
         }
-        res.push_back(newInterval);
-        while(i<n){
-            res.push_back(intervals[i]);
-            i++;
+        for(int i=0;i<n;i++){
+            res[i]=prefix[i]*suffix[i];
         }
         return res;
     }
