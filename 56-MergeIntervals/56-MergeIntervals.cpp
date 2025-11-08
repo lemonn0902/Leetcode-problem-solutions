@@ -1,16 +1,19 @@
-// Last updated: 11/8/2025, 8:43:20 PM
+// Last updated: 11/8/2025, 8:44:29 PM
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        vector<vector<int>> res;
-        int n= intervals.size();
+        vector<vector<int>> ans;
         sort(intervals.begin(), intervals.end());
-        for(int i=0;i<n;i++){
-            if(res.empty()|| intervals[i][0]>res.back()[1])
-            res.push_back(intervals[i]);
-            else
-            res.back()[1]=max(res.back()[1], intervals[i][1]);
+        for(int i=0;i<intervals.size();i++){
+            int start = intervals[i][0];
+            int end = intervals[i][1];
+            if(ans.empty()||ans.back()[1]<start){
+                ans.push_back(intervals[i]);
+            }
+            else{
+                ans.back()[1]=max(ans.back()[1], end);
+            }
         }
-        return res;
+        return ans;
     }
 };
