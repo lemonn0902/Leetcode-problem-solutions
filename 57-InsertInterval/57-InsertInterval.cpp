@@ -1,4 +1,4 @@
-// Last updated: 9/13/2025, 5:11:07 PM
+// Last updated: 11/8/2025, 8:59:00 PM
 class Solution {
 public:
     vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
