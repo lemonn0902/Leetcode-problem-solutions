@@ -1,9 +1,9 @@
-// Last updated: 11/8/2025, 10:23:47 PM
+// Last updated: 11/8/2025, 10:24:03 PM
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
         int n=nums.size();
-        vector<int> res(n,0);
+        vector<int> res(n);
         vector<int> prefix(n,1);
         vector<int> suffix(n,1);
         for(int i=1;i<n;i++){
