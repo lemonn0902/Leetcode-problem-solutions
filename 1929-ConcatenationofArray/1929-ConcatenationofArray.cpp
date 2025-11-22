@@ -1,20 +1,19 @@
-// Last updated: 11/22/2025, 2:41:54 PM
+// Last updated: 11/22/2025, 2:48:45 PM
 class Solution {
 public:
-    vector<int> shuffle(vector<int>& nums, int n) {
-        vector<int> ans(2*n,1);
-        int j=n;
-        int k=0;
-        for(int i=0;i<2*n;i++){
-            if(i%2!=0){
-                ans[i]=nums[j];
-                j++;
+    int findMaxConsecutiveOnes(vector<int>& nums) {
+        int maxi=INT_MIN;
+        int curr=0;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]==0){
+                maxi=max(maxi,curr);
+                curr=0;
             }
             else{
-                ans[i]=nums[k];
-                k++;
+                curr++;
             }
         }
-        return ans;
+        maxi=max(maxi,curr);
+        return maxi;
     }
 };
