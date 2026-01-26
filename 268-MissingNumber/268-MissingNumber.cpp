@@ -1,13 +1,14 @@
-// Last updated: 11/11/2025, 10:37:34 PM
-class Solution {
-public:
-    int missingNumber(vector<int>& nums) {
-        sort(nums.begin(), nums.end());
-        int n=nums.size();
-        for(int i=0;i<n;i++){
-            if(nums[i]!=i)
-            return i;
-        }
-        return n;
-    }
-};
+// Last updated: 1/27/2026, 12:16:09 AM
+1class Solution {
+2public:
+3    int missingNumber(vector<int>& nums) {
+4        sort(nums.begin(), nums.end());
+5        int n=nums.size();
+6        for(int i=0;i<n;i++){
+7            if(nums[i]!=i){
+8                return i;
+9            }
+10        }
+11        return n;
+12    }
+13};
