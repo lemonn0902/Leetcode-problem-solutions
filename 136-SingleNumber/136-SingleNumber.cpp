@@ -1,12 +1,12 @@
-// Last updated: 8/11/2025, 12:04:13 AM
-class Solution {
-public:
-    int singleNumber(vector<int>& nums) {
-        int n=nums.size();
-        int res=0;
-        for(int i=0;i<n;i++){
-            res=res^nums[i];
-        }
-        return res;
-    }
-};
+// Last updated: 1/27/2026, 12:30:01 AM
+1class Solution {
+2public:
+3    int singleNumber(vector<int>& nums) {
+4        int xorr=0;
+5        int n=nums.size();
+6        for(int i=0;i<n;i++){
+7            xorr=xorr^nums[i];
+8        }
+9        return xorr;
+10    }
+11};
