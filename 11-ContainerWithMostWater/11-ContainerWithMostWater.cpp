@@ -1,4 +1,4 @@
-// Last updated: 1/29/2026, 9:57:54 PM
+// Last updated: 1/29/2026, 9:58:28 PM
 1class Solution {
 2public:
 3    int maxArea(vector<int>& height) {
