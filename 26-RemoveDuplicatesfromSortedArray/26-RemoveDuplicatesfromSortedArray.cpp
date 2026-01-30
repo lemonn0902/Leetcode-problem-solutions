@@ -1,19 +1,14 @@
-// Last updated: 7/24/2025, 11:18:09 AM
-class Solution {
-public:
-    int removeDuplicates(vector<int>& nums) {
-        int n=nums.size();
-        if(n==0) return 0;
-        int i=0; //next unique index
-        for(int j=1;j<n;j++){
-            if(nums[i]!=nums[j]){
-                i++;
-                nums[i]=nums[j];
-                
-            }
-            
-
-        }
-        return i+1;
-    }
-};
+// Last updated: 1/30/2026, 6:52:58 PM
+1class Solution {
+2public:
+3    int removeDuplicates(vector<int>& nums) {
+4        int idx=0;
+5        for(int i=1;i<nums.size();i++){
+6            if(nums[idx]!=nums[i]){
+7                idx++;
+8                swap(nums[idx], nums[i]);
+9            }
+10        }
+11        return idx+1;
+12    }
+13};
