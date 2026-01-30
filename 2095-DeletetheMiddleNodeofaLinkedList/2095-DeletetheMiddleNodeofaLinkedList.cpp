@@ -1,4 +1,4 @@
-// Last updated: 1/30/2026, 6:26:08 PM
+// Last updated: 1/30/2026, 6:31:29 PM
 1/**
 2 * Definition for singly-linked list.
 3 * struct ListNode {
@@ -9,33 +9,21 @@
 8 *     ListNode(int x, ListNode *next) : val(x), next(next) {}
 9 * };
 10 */
-11 class Solution {
+11class Solution {
 12public:
-13    
-14    ListNode* deleteMiddle(ListNode* head) {
-15        if (head == nullptr) return nullptr; // Handle empty list
-16        if (head->next == nullptr) { // Handle single node list
-17            //delete head;
-18            return nullptr;
-19        }
-20
-21        ListNode* slow = head;
-22        ListNode* fast = head;
-23        ListNode* prev = nullptr;
-24
-25        // Find the middle node and its previous node
-26        while (fast && fast->next) {
-27            prev = slow;
-28            slow = slow->next;
-29            fast = fast->next->next;
-30        }
-31
-32        // Delete the middle node
-33        if (prev != nullptr) {
-34            prev->next = slow->next; // Skip over the middle node
-35            delete slow; 
-36        }
-37        return head; 
-38    }
-39};
-40
+13    ListNode* deleteMiddle(ListNode* head) {
+14        if(head==NULL||head->next==NULL){
+15            return NULL;
+16        }
+17        ListNode* slow=head;
+18        ListNode* fast=head->next->next;
+19        while(fast && fast->next){
+20            slow=slow->next;
+21            fast=fast->next->next;
+22        }
+23        ListNode* toDelete=slow->next;
+24        slow->next=slow->next->next;
+25        delete toDelete;
+26        return head;
+27    }
+28};
