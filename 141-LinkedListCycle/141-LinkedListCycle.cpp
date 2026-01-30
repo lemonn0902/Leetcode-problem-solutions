@@ -1,4 +1,4 @@
-// Last updated: 1/30/2026, 11:55:29 AM
+// Last updated: 1/30/2026, 11:55:43 AM
 1/**
 2 * Definition for singly-linked list.
 3 * struct ListNode {
@@ -12,14 +12,13 @@
 11    bool hasCycle(ListNode *head) {
 12        ListNode* slow=head;
 13        ListNode* fast=head;
-14        while(fast && fast->next!=NULL){
-15            slow=slow->next;
+14        while(fast&&fast->next!=NULL){
+15            slow= slow->next;
 16            fast=fast->next->next;
-17            if(slow==fast){
+17            if(slow == fast){
 18                return true;
-19                break;
-20            } 
-21        }
-22        return false;
-23    }
-24};
+19            }
+20        }
+21        return false;
+22    }
+23};
