@@ -1,4 +1,4 @@
-// Last updated: 1/31/2026, 4:06:57 PM
+// Last updated: 1/31/2026, 4:07:13 PM
 1class Solution {
 2public:
 3    int getValidChar(string str, int idx){
