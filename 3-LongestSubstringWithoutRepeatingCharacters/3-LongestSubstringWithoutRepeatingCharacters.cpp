@@ -1,22 +1,20 @@
-// Last updated: 2/3/2026, 12:19:36 PM
+// Last updated: 3/5/2026, 3:24:33 PM
 1class Solution {
 2public:
 3    int lengthOfLongestSubstring(string s) {
-4         int n=s.size();
-5         int l=0;
-6         int r=0;
-7         int maxi=0;
-8         string x="";
-9         while(r<n){
-10            while(x.find(s[r])!=string::npos){
-11                x.erase(0,1);
-12                l++;
-13                
-14            }
-15            x.push_back(s[r]);
-16            maxi=max(maxi, r-l+1);
-17            r++;
-18         }
-19         return maxi;
-20    }
-21};
+4        int max_len=0;
+5        int l=0, r=0;
+6        int n=s.size();
+7        string str="";
+8        while(r<n){
+9            while(str.find(s[r])!=string::npos){
+10                l++;
+11                str.erase(0,1);
+12            }
+13            max_len=max(max_len, r-l+1);
+14            str=str+s[r];
+15            r++;
+16        }
+17        return max_len;
+18    }
+19};
