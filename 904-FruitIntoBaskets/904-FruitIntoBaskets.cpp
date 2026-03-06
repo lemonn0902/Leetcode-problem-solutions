@@ -1,27 +1,22 @@
-// Last updated: 7/27/2025, 10:16:50 PM
-class Solution {
-public:
-    int totalFruit(vector<int>& fruits) {
-        int l=0;
-        int r=0;
-        int n=fruits.size();
-        unordered_map<int, int> types;
-        int maxAns=-9999;
-        while(r<n){
-            
-            types[fruits[r]]++;
-            while(types.size()>2){
-                types[fruits[l]]--;
-                if (types[fruits[l]] == 0)
-                    types.erase(fruits[l]);
-                l++;
-            }
-            
-            
-            maxAns=max(maxAns,1+r-l);
-            r++;
-
-        }
-        return maxAns;
-    }
-};
+// Last updated: 3/6/2026, 7:41:21 PM
+1class Solution {
+2public:
+3    int totalFruit(vector<int>& fruits) {
+4        unordered_map<int, int> basket;
+5        int maxi=0;
+6        int l=0; int r=0;
+7        int n=fruits.size();
+8        while(r<n){
+9            basket[fruits[r]]++;
+10            while(basket.size()>2){
+11                basket[fruits[l]]--;
+12                if(basket[fruits[l]]==0) basket.erase(fruits[l]);
+13                l++;
+14                
+15            }
+16            maxi=max(maxi, r-l+1);
+17            r++;
+18        }
+19        return maxi;
+20    }
+21};
