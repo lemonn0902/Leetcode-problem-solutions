@@ -1,4 +1,4 @@
-// Last updated: 3/18/2026, 10:12:20 PM
+// Last updated: 3/18/2026, 10:13:31 PM
 1/**
 2 * Definition for a binary tree node.
 3 * struct TreeNode {
@@ -24,8 +24,8 @@
 23            path="";
 24            return;
 25        }
-26        if(root->left) dfs(root->left, ans, path);
-27        if(root->right) dfs(root->right, ans, path);
+26         dfs(root->left, ans, path);
+27         dfs(root->right, ans, path);
 28    }
 29    vector<string> binaryTreePaths(TreeNode* root) {
 30        vector<string> ans;
