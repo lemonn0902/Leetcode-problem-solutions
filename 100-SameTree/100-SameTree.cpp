@@ -1,4 +1,4 @@
-// Last updated: 12/2/2025, 11:16:12 PM
+// Last updated: 3/18/2026, 10:35:59 PM
 1/**
 2 * Definition for a binary tree node.
 3 * struct TreeNode {
@@ -12,14 +12,16 @@
 11 */
 12class Solution {
 13public:
-14    bool dfs(TreeNode* p, TreeNode* q){
+14    bool check(TreeNode* p, TreeNode* q){
 15        if(!p&&!q) return true;
-16        if(!p||!q) return false;
-17        if(p->val!=q->val) return false;
-18        return dfs(p->left,q->left) && dfs(p->right,q->right);
-19    }
-20    bool isSameTree(TreeNode* p, TreeNode* q) {
-21        bool ans= dfs(p,q);
-22        return ans;
-23    }
-24};
+16        if(!p) return false;
+17        if(!q) return false;
+18        if(p->val!=q->val) return false;
+19        return check(p->left, q->left) && check(p->right,q->right);
+20    }
+21    bool isSameTree(TreeNode* p, TreeNode* q) {
+22        
+23        return check(p,q);
+24
+25    }
+26};
