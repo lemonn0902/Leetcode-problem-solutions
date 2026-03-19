@@ -1,4 +1,4 @@
-// Last updated: 3/19/2026, 11:19:49 PM
+// Last updated: 3/19/2026, 11:21:19 PM
 1/**
 2 * Definition for a binary tree node.
 3 * struct TreeNode {
@@ -12,11 +12,11 @@
 11 */
 12class Solution {
 13public:
-14    TreeNode* countForests(TreeNode* root, vector<int>& to_delete,vector<TreeNode*>& ans){
+14    TreeNode* countForests(TreeNode* root, vector<int>& to_delete,vector<TreeNode*>& ans,unordered_set<int>& del){
 15        if(!root) return NULL;
-16        root->left=countForests(root->left, to_delete,ans);
-17        root->right=countForests(root->right, to_delete,ans);
-18        if(find(to_delete.begin(), to_delete.end(), root->val) != to_delete.end()){
+16        root->left=countForests(root->left, to_delete,ans,del);
+17        root->right=countForests(root->right, to_delete,ans,del);
+18        if(del.count(root->val)){
 19            if(root->left) ans.push_back(root->left);
 20            if(root->right) ans.push_back(root->right);
 21            return NULL;
@@ -25,11 +25,12 @@
 24
 25    }
 26    vector<TreeNode*> delNodes(TreeNode* root, vector<int>& to_delete) {
-27        vector<TreeNode*> ans;
-28        TreeNode* res= countForests(root, to_delete, ans);
-29        if(res){
-30            ans.push_back(root);
-31        }
-32        return ans;
-33    }
-34};
+27        unordered_set<int> del(to_delete.begin(), to_delete.end());
+28        vector<TreeNode*> ans;
+29        TreeNode* res= countForests(root, to_delete, ans,del);
+30        if(res){
+31            ans.push_back(root);
+32        }
+33        return ans;
+34    }
+35};
