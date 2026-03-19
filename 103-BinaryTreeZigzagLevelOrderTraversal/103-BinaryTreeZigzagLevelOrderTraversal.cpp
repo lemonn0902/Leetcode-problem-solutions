@@ -1,4 +1,4 @@
-// Last updated: 12/2/2025, 10:41:16 PM
+// Last updated: 3/20/2026, 12:11:11 AM
 1/**
 2 * Definition for a binary tree node.
 3 * struct TreeNode {
@@ -12,14 +12,31 @@
 11 */
 12class Solution {
 13public:
-14    bool dfs(TreeNode* leftNode, TreeNode* rightNode){
-15        if(!leftNode&&!rightNode) return true;
-16        if(!leftNode||!rightNode) return false;
-17        if(leftNode->val!=rightNode->val) return false;
-18        return dfs(leftNode->left, rightNode->right) && dfs(leftNode->right, rightNode->left);
-19    }
-20    bool isSymmetric(TreeNode* root) {
-21        bool ans= dfs(root->left, root->right);
-22        return ans;
-23    }
-24};
+14    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+15        queue<TreeNode*> q;
+16        vector<vector<int>> ans;
+17        if(!root) return ans;
+18        q.push(root);
+19        int odd=false;
+20        while(!q.empty()){
+21            int size=q.size();
+22            vector<int> res;
+23            odd=!odd;
+24            for(int i=0;i<size;i++){
+25                TreeNode* node=q.front();
+26                q.pop();
+27                if(node->left) q.push(node->left);
+28                if(node->right) q.push(node->right);
+29                res.push_back(node->val);
+30            }
+31            if(odd==true)
+32            ans.push_back(res);
+33            else {
+34            reverse(res.begin(), res.end());
+35            ans.push_back(res);
+36            }
+37
+38        }
+39        return ans;
+40    }
+41};
