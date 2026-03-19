@@ -1,4 +1,4 @@
-// Last updated: 3/19/2026, 4:18:44 PM
+// Last updated: 3/19/2026, 4:46:46 PM
 1/**
 2 * Definition for a binary tree node.
 3 * struct TreeNode {
@@ -11,27 +11,27 @@
 10 * };
 11 */
 12class BSTIterator {
-13    vector<int> in; 
-14    int curr;
-15public:
-16    BSTIterator(TreeNode* root) {
-17        curr=0;
-18        inorder(root, in);
-19    }
-20    void inorder(TreeNode* root, vector<int>& in){
-21        if(!root) return;
-22        inorder(root->left, in);
-23        in.push_back(root->val);
-24        inorder(root->right, in);
-25    }
-26    
-27    int next() {
-28        if(curr<in.size()) return in[curr++];
-29        else return -1;
+13    stack<TreeNode*> st;
+14public:
+15    BSTIterator(TreeNode* root) {
+16        helper(root);
+17    }
+18    void helper(TreeNode* node){
+19        while(node){
+20            st.push(node);
+21            node=node->left;
+22        }
+23    }
+24    
+25    int next() {
+26        TreeNode* node=st.top();
+27        st.pop();
+28        helper(node->right);
+29        return node->val;
 30    }
 31    
 32    bool hasNext() {
-33        return curr<in.size();
+33        return !st.empty();
 34    }
 35};
 36
