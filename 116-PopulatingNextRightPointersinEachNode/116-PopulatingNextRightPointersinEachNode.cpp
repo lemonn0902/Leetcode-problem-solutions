@@ -1,4 +1,4 @@
-// Last updated: 3/24/2026, 10:48:47 PM
+// Last updated: 3/24/2026, 11:00:54 PM
 1/*
 2// Definition for a Node.
 3class Node {
@@ -20,20 +20,15 @@
 19class Solution {
 20public:
 21    Node* connect(Node* root) {
-22        if(!root) return root;
-23        queue<Node*> q;
-24        q.push(root);
-25        while(!q.empty()){
-26            int size=q.size();
-27            for(int i=0;i<size;i++){
-28                Node* curr=q.front();
-29                q.pop();
-30                if(i==size-1) curr->next=NULL;
-31                else curr->next=q.front();
-32                if(curr->left) q.push(curr->left);
-33                if(curr->right) q.push(curr->right);
-34            }
-35        }
-36        return root;
-37    }
-38};
+22        if(!root) return NULL;
+23        if(root->right&&root->left){
+24            root->left->next=root->right;
+25            if(root->next){
+26                root->right->next=root->next->left;
+27            }
+28        }
+29        connect(root->left);
+30        connect(root->right);
+31        return root;
+32    }
+33};
