@@ -1,20 +1,18 @@
-// Last updated: 4/21/2025, 4:09:31 PM
-class Solution {
-public:
-    int f(vector<int>& cost, int start, vector<int>& dp, int index){
-        if(index == start) return cost[start];
-        if(index == start + 1) return cost[start + 1];
-        if(dp[index-start]!=-1) return dp[index-start];
-        int os=f(cost, start, dp, index-1) +cost[index];
-        int ts=f(cost, start, dp, index-2) +cost[index];
-        return dp[index-start]= min(os, ts);
-    }
-    int minCostClimbingStairs(vector<int>& cost) {
-        int n= cost.size();
-        
-        vector<int> dp(n,-1);
-        int case1= f(cost, 0, dp,n-1);
-        int case2= f(cost, 0, dp,n-2);
-        return min(case1, case2);
-    }
-};
+// Last updated: 3/26/2026, 11:20:12 PM
+1class Solution {
+2public:
+3    int f(int start,int n, vector<int>& cost,vector<int>& dp ){
+4        if(start>=n) return 0;
+5        if(dp[start]!=-1) return dp[start];
+6        int a=f(start+1,n,cost,dp);
+7        int b=f(start+2,n,cost,dp);
+8        return dp[start]=cost[start]+min(a,b);
+9    }
+10    int minCostClimbingStairs(vector<int>& cost) {
+11        int n=cost.size();
+12        vector<int> dp(n,-1);
+13        int start_at_0= f(0,n,cost,dp);
+14        int start_at_1= f(1,n,cost,dp);
+15        return min(start_at_0, start_at_1);
+16    }
+17};
