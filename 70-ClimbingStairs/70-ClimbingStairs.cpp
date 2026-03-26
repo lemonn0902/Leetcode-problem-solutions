@@ -1,31 +1,17 @@
-// Last updated: 8/5/2025, 7:09:38 PM
-class Solution {
-public:
-    // int f(int index, vector<int>& dp){
-    //     if(index==0||index==1){
-    //         return 1;
-    //     }
-    //     if(dp[index]!=-1) return dp[index];
-    //     //take 1 step
-    //     int p=f(index-1,dp);
-    //     //take 2 steps
-    //     int r=f(index-2,dp);
-    //     dp[index]=p+r;
-    //     return dp[index];
-
-
-    // }
-    int climbStairs(int n) {
-        
-        vector<int> dp(n+1,-1);
-        dp[0]=1;
-        dp[1]=1;
-        for(int i=2;i<=n;i++){
-            int p=dp[i-1];
-            int q=dp[i-2];
-            dp[i]=p+q;
-
-        }
-        return dp[n];
-    }
-};
+// Last updated: 3/26/2026, 10:29:27 PM
+1class Solution {
+2public:
+3    int f(int n, vector<int>& dp){
+4        if(n==0||n==1) return 1;
+5        if(dp[n]!=-1) return dp[n];
+6        int a=f(n-1,dp);
+7        int b=f(n-2,dp);
+8        return dp[n]=a+b;
+9
+10    }
+11    int climbStairs(int n) {
+12        vector<int> dp(n+1, -1);
+13        return f(n, dp);
+14         
+15    }
+16};
