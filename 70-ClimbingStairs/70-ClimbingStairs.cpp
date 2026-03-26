@@ -1,4 +1,4 @@
-// Last updated: 3/26/2026, 10:29:27 PM
+// Last updated: 3/26/2026, 10:31:34 PM
 1class Solution {
 2public:
 3    int f(int n, vector<int>& dp){
@@ -10,8 +10,12 @@
 9
 10    }
 11    int climbStairs(int n) {
-12        vector<int> dp(n+1, -1);
-13        return f(n, dp);
-14         
-15    }
-16};
+12        vector<int> dp(n+1);
+13        dp[0]=1;
+14        dp[1]=1;
+15        for(int i=2;i<=n;i++){
+16            dp[i]=dp[i-1]+dp[i-2];
+17        }
+18        return dp[n];
+19    }
+20};
