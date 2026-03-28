@@ -1,22 +1,21 @@
-// Last updated: 8/5/2025, 7:51:53 PM
-class Solution {
-public:
-    int f(vector<int>& nums, int index,vector<int>& dp ){
-        if(index==0){
-            return nums[0];
-        }
-        if(index==1) return max(nums[0],nums[1]);
-        if(dp[index]!=-1) return dp[index];
-        //rob house
-        int p=f(nums,index-2,dp)+nums[index];
-        //dont rob
-        int q=f(nums,index-1,dp);
-        dp[index]=max(p,q);
-        return dp[index];
-
-    }
-    int rob(vector<int>& nums) {
-        vector<int> dp(nums.size(),-1);
-        return f(nums, nums.size()-1,dp);
-    }
-};
+// Last updated: 3/28/2026, 11:13:56 PM
+1class Solution {
+2public:
+3    int f(int index, vector<int>& dp, vector<int>& nums){
+4        if(index==0) return nums[0];
+5        if(index == 1) return max(nums[0], nums[1]);
+6
+7        if(dp[index]!=-1) return dp[index];
+8        //rob
+9        int r=f(index-2, dp, nums)+nums[index];
+10        //skip
+11        int s=f(index-1, dp, nums);
+12        return dp[index]= max(r,s);
+13
+14    }
+15    int rob(vector<int>& nums) {
+16        int n=nums.size();
+17        vector<int> dp(n,-1);
+18        return f(n-1, dp, nums);
+19    }
+20};
