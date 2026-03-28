@@ -1,23 +1,24 @@
-// Last updated: 8/5/2025, 8:08:08 PM
-class Solution {
-public:
-    int robLinear(vector<int>& nums, int index, int start, int end, vector<int>&dp){
-        if(index==start) return nums[start];
-        if(index==start+1) return max(nums[start], nums[start+1]);
-
-        if(dp[index-start]!=-1) return dp[index-start];
-        int rob=robLinear(nums, index-2,start,end,dp)+nums[index];
-        int skip=robLinear(nums, index-1, start,end,dp);
-        return dp[index-start]=max(rob,skip);
-    }
-    int rob(vector<int>& nums) {
-        int n=nums.size();
-        if(n==1) return nums[0];
-        vector<int> dp1(n-1,-1);
-        vector<int> dp2(n-1, -1);
-
-        int case1= robLinear(nums, n-2, 0, n-2,dp1);
-        int case2= robLinear(nums, n-1, 1, n-1,dp2);
-        return max(case1, case2);
-    }
-};
+// Last updated: 3/28/2026, 11:44:11 PM
+1class Solution {
+2public:
+3    int f(vector<int>& nums,int i,vector<int>& dp, int s){
+4        if(i < s) return 0;
+5        if(i == s) return nums[i];
+6        if(dp[i]!=-1) return dp[i];
+7        //rob
+8        int rob=nums[i]+f(nums,i-2,dp,s);
+9        //dont rob
+10        int skip=f(nums,i-1,dp,s);
+11        return dp[i]=max(rob,skip);
+12
+13    }
+14    int rob(vector<int>& nums) {
+15        int n=nums.size();
+16        if(n==1) return nums[0];
+17        vector<int> dp1(n,-1);
+18        vector<int> dp2(n,-1);
+19        int ans1=f(nums,n-2,dp1,0);
+20        int ans2=f(nums,n-1,dp2,1);
+21        return max(ans1, ans2);
+22    }
+23};
