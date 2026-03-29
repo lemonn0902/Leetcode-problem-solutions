@@ -1,4 +1,4 @@
-// Last updated: 3/30/2026, 12:44:47 AM
+// Last updated: 3/30/2026, 12:46:09 AM
 1class Solution {
 2public:
 3    // int f(int n, vector<int>& dp){
@@ -8,15 +8,17 @@
 7    //     return dp[n]=f(n-1,dp)+f(n-2,dp)+f(n-3,dp);
 8    // }
 9    int tribonacci(int n) {
-10        if(n == 0) return 0;
-11        if(n == 1 || n == 2) return 1;
-12        vector<int> dp(n+1,0);
-13        dp[0]=0;
-14        dp[1]=1;
-15        dp[2]=1;
-16        for(int i=3;i<=n;i++){
-17            dp[i]=dp[i-1]+dp[i-2]+dp[i-3];
-18        }
-19        return dp[n];
-20    }
-21};
+10        if (n == 0)
+11            return 0;
+12        if (n == 1 || n == 2)
+13            return 1;
+14        int a = 0, b = 1, c = 1;
+15        for (int i = 3; i <= n; i++) {
+16            int d = a + b + c;
+17            a = b;
+18            b = c;
+19            c = d;
+20        }
+21        return c;
+22    }
+23};
