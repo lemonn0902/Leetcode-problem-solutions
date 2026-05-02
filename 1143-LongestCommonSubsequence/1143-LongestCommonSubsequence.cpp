@@ -1,33 +1,30 @@
-// Last updated: 5/2/2026, 11:15:51 PM
+// Last updated: 5/2/2026, 11:22:40 PM
 1class Solution {
 2public:
-3    // memoization:
-4    //  int f(int i, int j, string &text1, string &text2, vector<vector<int>>&
-5    //  dp){
-6    //      if(i == 0 || j == 0) return 0;
-7    //      if(dp[i][j] != -1) return dp[i][j];
-8    //      if(text1[i-1] == text2[j-1])
-9    //          return dp[i][j] = 1 + f(i-1, j-1, text1, text2, dp);
-10    //      return dp[i][j] = max(f(i-1, j, text1, text2, dp), f(i, j-1, text1,
-11    //      text2, dp));
-12    //  }
-13
-14    int longestCommonSubsequence(string text1, string text2) {
-15        int n = text1.size(), m = text2.size();
-16        vector<vector<int>> dp(n + 1, vector<int>(m + 1, -1));
-17        for (int j = 0; j <= m; j++)
-18            dp[0][j] = 0;
-19        for (int i = 0; i <= n; i++)
-20            dp[i][0] = 0;
-21        for (int i = 1; i <= n; i++) {
-22            for (int j = 1; j <= m; j++) {
-23                if (text1[i - 1] == text2[j - 1])
-24                    dp[i][j] = 1 + dp[i - 1][j - 1];
-25                else
-26                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
-27            }
-28        }
-29        return dp[n][m];
-30    }
-31};
-32
+3    // int f(string text1, string text2,int n,int m,vector<vector<int>>& dp, int idx1,int idx2){
+4    //     if(idx1==n || idx2==m){
+5    //         return 0;
+6    //     }
+7    //     if(dp[idx1][idx2]!=-1) return dp[idx1][idx2];
+8    //     if(text1[idx1]==text2[idx2]){
+9    //         return dp[idx1][idx2]=f(text1,text2,n,m,dp,idx1+1, idx2+1)+1;
+10    //     }
+11    //     return dp[idx1][idx2] = max(f(text1,text2,n,m,dp,idx1, idx2+1), f(text1,text2,n,m,dp,idx1+1, idx2));
+12    // }
+13    int longestCommonSubsequence(string text1, string text2) {
+14        if(text1==text2) return text1.size();
+15        int n =text1.size();
+16        int m =text2.size();
+17        vector<vector<int>> dp(n+1,vector<int>(m+1,0));
+18        //return f(text1, text2, n,m,dp,0,0);
+19        for(int i=n-1;i>=0;i--){
+20            for(int j=m-1;j>=0;j--){
+21                if(text1[i]==text2[j]){
+22                    dp[i][j]=1+dp[i+1][j+1];
+23                }
+24                else dp[i][j]= max(dp[i+1][j], dp[i][j+1]);
+25            }
+26        }
+27        return dp[0][0];
+28    }
+29};
