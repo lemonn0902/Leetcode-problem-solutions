@@ -1,32 +1,34 @@
-// Last updated: 5/27/2025, 8:15:27 PM
-class Solution {
-public:
-//memoization: 
-    // int f(string& s, string& t, int i, int j, vector<vector<int>>& dp){
-    //     if(j==0) return 1;
-    //     if(i==0) return 0;
-    //     if(dp[i][j]!=-1) return dp[i][j];
-    //     if(s[i-1]==t[j-1]){
-    //         return (f(s,t,i-1,j-1,dp)+f(s,t,i-1,j,dp));
-    //     }
-    //     else 
-    //     return dp[i][j]=f(s,t,i-1,j,dp);
-    // }
-    int numDistinct(string s, string t) {
-        int m= s.size();
-        int n= t.size();
-        vector<vector<unsigned int>> dp(m+1, vector<unsigned int>(n+1,0));
-        for(int i=0;i<=m;i++){
-            dp[i][0]=1;
-        }
-        for(int i=1;i<=m;i++){
-            for(int j=1;j<=n;j++){
-                if(s[i-1]==t[j-1])
-                dp[i][j]= dp[i-1][j-1]+dp[i-1][j];
-                else
-                dp[i][j]= dp[i-1][j];
-            }
-        }
-        return dp[m][n];
-    }
-};
+// Last updated: 5/6/2026, 11:36:39 PM
+1class Solution {
+2public:
+3    int f(int i, int j, string& s, string& t,
+4          vector<vector<int>>& dp) {
+5
+6        if (j == t.size()) return 1;
+7
+8        if (i == s.size()) return 0;
+9
+10        if (dp[i][j] != -1)
+11            return dp[i][j];
+12
+13        int take = 0;
+14
+15        if (s[i] == t[j]) {
+16            take = f(i + 1, j + 1, s, t, dp);
+17        }
+18
+19        int notTake = f(i + 1, j, s, t, dp);
+20
+21        return dp[i][j] = take + notTake;
+22    }
+23
+24    int numDistinct(string s, string t) {
+25
+26        vector<vector<int>> dp(
+27            s.size(),
+28            vector<int>(t.size(), -1)
+29        );
+30
+31        return f(0, 0, s, t, dp);
+32    }
+33};
