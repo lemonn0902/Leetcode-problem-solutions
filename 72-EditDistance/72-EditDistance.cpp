@@ -1,18 +1,27 @@
-// Last updated: 4/10/2025, 11:50:17 AM
-class Solution {
-public:
-    int f(int i, int j, string & s1, string &s2, vector<vector<int>> &dp){
-        if(i<0) return j+1;
-        if(j<0) return i+1;
-        if(dp[i][j]!=-1) return dp[i][j];
-        if(s1[i]==s2[j]) return dp[i][j]=f(i-1,j-1,s1,s2,dp);
-        return dp[i][j]=1+min(f(i-1,j,s1,s2,dp), min(f(i,j-1,s1,s2,dp),f(i-1,j-1,s1,s2,dp)));
-    }
-    int minDistance(string word1, string word2) {
-        int m=word1.size();
-        int n=word2.size();
-        vector<vector<int>> dp(m, vector<int>(n, -1));
-
-        return f(m-1,n-1,word1,word2,dp);
-    }
-};
+// Last updated: 5/7/2026, 12:21:54 AM
+1class Solution {
+2public:
+3    int f(int i, int j, string& word1, string& word2, int n, int m,
+4          vector<vector<int>>& dp) {
+5        if (i == n)
+6            return m - j;
+7        if (j == m)
+8            return n - i;
+9        if (dp[i][j] != -1)
+10            return dp[i][j];
+11        if (word1[i] == word2[j]) {
+12            return dp[i][j] = f(i + 1, j + 1, word1, word2, n, m, dp);
+13        }
+14        int insert = 1 + f(i, j + 1, word1, word2, n, m, dp);
+15        int del = 1 + f(i + 1, j, word1, word2, n, m, dp);
+16        int replace = 1 + f(i + 1, j + 1, word1, word2, n, m, dp);
+17        return dp[i][j] = min(insert, min(del, replace));
+18    }
+19
+20    int minDistance(string word1, string word2) {
+21        int n = word1.size();
+22        int m = word2.size();
+23        vector<vector<int>> dp(n, vector<int>(m, -1));
+24        return f(0, 0, word1, word2, n, m, dp);
+25    }
+26};
