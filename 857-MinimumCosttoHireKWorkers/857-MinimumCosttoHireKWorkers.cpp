@@ -1,4 +1,4 @@
-// Last updated: 5/26/2026, 12:18:48 AM
+// Last updated: 5/26/2026, 12:18:53 AM
 1class Solution {
 2public:
 3    double mincostToHireWorkers(vector<int>& quality, vector<int>& wage,int k) {
