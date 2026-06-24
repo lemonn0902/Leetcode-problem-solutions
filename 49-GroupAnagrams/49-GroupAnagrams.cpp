@@ -1,18 +1,17 @@
-// Last updated: 10/12/2025, 3:09:28 PM
-class Solution {
-public:
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        
-        vector<vector<string>> res;
-        unordered_map<string, vector<string>> mpp;
-        for(int i=0;i<strs.size();i++){
-            string curr= strs[i];
-            sort(curr.begin(), curr.end());
-            mpp[curr].push_back(strs[i]);
-        }
-        for(auto it: mpp){
-            res.push_back(it.second);
-        }
-        return res;
-    }
-};
+// Last updated: 6/24/2026, 7:43:34 PM
+1class Solution {
+2public:
+3    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+4        vector<vector<string>> res;
+5        unordered_map<string, vector<string>> mpp;
+6        for(int i=0;i<strs.size();i++){
+7            string curr=strs[i];
+8            sort(curr.begin(), curr.end());
+9            mpp[curr].push_back(strs[i]);
+10        }
+11        for(auto it: mpp){
+12            res.push_back(it.second);
+13        }
+14        return res;
+15    }
+16};
