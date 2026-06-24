@@ -1,12 +1,16 @@
-// Last updated: 6/24/2026, 7:26:49 PM
+// Last updated: 6/24/2026, 7:29:46 PM
 1class Solution {
 2public:
 3    bool isAnagram(string s, string t) {
-4        map<char, int> mpp1;
-5        map<char, int> mpp2;
-6        for(auto it:s) mpp1[it]++;
-7        for(auto it:t) mpp2[it]++;
-8        if(mpp1==mpp2) return true;
-9        else return false;
-10    }
-11};
+4        unordered_map<char,int> mpp;
+5        if(s.size()!=t.size()) return false;
+6        for(int i=0;i<s.size();i++){
+7            mpp[s[i]]++;
+8            mpp[t[i]]--;
+9        }
+10        for(auto it:mpp){
+11            if(it.second!=0) return false;
+12        }
+13        return true;
+14    }
+15};
