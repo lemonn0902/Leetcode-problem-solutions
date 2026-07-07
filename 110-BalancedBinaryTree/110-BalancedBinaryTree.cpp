@@ -1,30 +1,24 @@
-// Last updated: 3/19/2026, 5:18:18 PM
-1/**
-2 * Definition for a binary tree node.
-3 * struct TreeNode {
-4 *     int val;
-5 *     TreeNode *left;
-6 *     TreeNode *right;
-7 *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-8 *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-9 *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
-10 * right(right) {}
-11 * };
-12 */
-13class Solution {
-14public:
-15    int findHeight(TreeNode* node) {
-16        if (!node)
-17            return 0;
-18        return 1 + max(findHeight(node->right), findHeight(node->left));
-19    }
-20    bool isBalanced(TreeNode* root) {
-21        if (!root)
-22            return true;
-23        int l = findHeight(root->left);
-24        int r = findHeight(root->right);
-25        if (abs(l - r) > 1)
-26            return false;
-27        return isBalanced(root->right) && isBalanced(root->left);
-28    }
-29};
+// Last updated: 7/7/2026, 1:11:04 PM
+1class Solution {
+2public:
+3    int longestBalanced(vector<int>& nums) {
+4        int n = nums.size();
+5        int maxi = 0;
+6
+7        for (int i = 0; i < n; i++) {
+8            unordered_set<int> odd, even;
+9
+10            for (int j = i; j < n; j++) {
+11                if (nums[j] % 2 == 0)
+12                    even.insert(nums[j]);
+13                else
+14                    odd.insert(nums[j]);
+15
+16                if (odd.size() == even.size())
+17                    maxi = max(maxi, j - i + 1);
+18            }
+19        }
+20
+21        return maxi;
+22    }
+23};
