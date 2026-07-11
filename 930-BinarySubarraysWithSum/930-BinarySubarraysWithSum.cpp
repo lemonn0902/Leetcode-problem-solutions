@@ -1,22 +1,19 @@
-// Last updated: 3/11/2026, 12:32:21 PM
+// Last updated: 7/11/2026, 11:09:06 PM
 1class Solution {
 2public:
-3    long long f(vector<int>& nums, int goal){
-4        int l=0; long long sum=0; long long count=0;
-5        for(int r=0;r<nums.size();r++){
-6            sum+=nums[r];
-7            while(sum>goal&&l<=r){
-8                sum-=nums[l];
-9                l++;
-10            }
-11            count+=(r-l+1);
-12        }
-13        return count;
-14    }
-15    int numSubarraysWithSum(vector<int>& nums, int goal) {
-16        if(goal<0) return 0;
-17        long long x=f(nums, goal);
-18        long long y=f(nums, goal-1);
-19        return (int)x-y;
-20    }
-21};
+3    int numSubarraysWithSum(vector<int>& nums, int goal) {
+4        unordered_map<int,int> mpp; //prefixSum, freq
+5        mpp[0]=1;
+6        int prefix=0;
+7        int n=nums.size();
+8        int count=0;
+9        for(int i=0;i<n;i++){
+10            prefix+=nums[i];
+11            if(mpp.find(prefix-goal)!=mpp.end()){
+12                count=count+mpp[prefix-goal];
+13            }
+14            mpp[prefix]++;
+15        }
+16        return count;
+17    }
+18};
