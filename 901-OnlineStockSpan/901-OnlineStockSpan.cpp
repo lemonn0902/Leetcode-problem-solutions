@@ -1,4 +1,4 @@
-// Last updated: 7/15/2026, 9:12:08 PM
+// Last updated: 7/15/2026, 9:12:45 PM
 1class StockSpanner {
 2public:
 3    stack<pair<int,int>> st;
@@ -13,7 +13,7 @@
 12            st.pop();
 13        }
 14        st.push({price,span});
-15        return st.top().second;
+15        return span;
 16
 17    }
 18};
