@@ -1,28 +1,39 @@
-// Last updated: 8/21/2025, 11:52:03 PM
-class Solution {
-public:
-    bool dfs(int index, int c, vector<vector<int>>& graph, vector<int>& color){
-        color[index]=c;
-        int s=graph[index].size();
-        for(int i=0;i<s;i++){
-            int neigh=graph[index][i];
-            if(color[neigh]==-1){
-                if(!dfs(neigh, !c, graph, color)) return false;
-            }
-            else if(color[neigh]==c){
-                return false;
-            }
-        }
-        return true;
-    }
-    bool isBipartite(vector<vector<int>>& graph) {
-        int nodes=graph.size();
-        vector<int> color(nodes,-1);
-        for(int i=0;i<nodes;i++){
-            if(color[i]==-1){
-                if(dfs(i,0,graph,color)==false) return false;
-            }
-        }
-        return true;
-    }
-};
+// Last updated: 8/6/2026, 4:59:59 PM
+1class Solution {
+2public:
+3    bool isBipartite(vector<vector<int>>& graph) {
+4        int n = graph.size();
+5        vector<int> seen(n, -1);
+6
+7        for (int i = 0; i < n; i++) {
+8
+9            if (seen[i] != -1)
+10                continue;
+11
+12            queue<pair<int, int>> q;
+13            q.push({i, 0});
+14            seen[i] = 0;
+15
+16            while (!q.empty()) {
+17
+18                auto [node, color] = q.front();
+19                q.pop();
+20
+21                int opp = (color == 0) ? 1 : 0;
+22
+23                for (int next : graph[node]) {
+24
+25                    if (seen[next] == -1) {
+26                        seen[next] = opp;
+27                        q.push({next, opp});
+28                    }
+29                    else if (seen[next] == color) {
+30                        return false;
+31                    }
+32                }
+33            }
+34        }
+35
+36        return true;
+37    }
+38};
