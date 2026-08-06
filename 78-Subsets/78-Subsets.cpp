@@ -1,21 +1,21 @@
-// Last updated: 9/22/2025, 4:05:38 PM
-class Solution {
-public:
-    void backtrack(vector<int>& nums, vector<vector<int>>& res, vector<int>& sub, int i){
-        int n=nums.size();
-        if(i==n){
-            res.push_back(sub);
-            return;
-        }
-        sub.push_back(nums[i]);
-        backtrack(nums, res, sub,i+1);
-        sub.pop_back();
-        backtrack(nums, res, sub,i+1);
-    }
-    vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> res;
-        vector<int> sub;
-        backtrack(nums, res, sub,0);
-        return res;
-    }
-};
+// Last updated: 8/6/2026, 6:57:52 PM
+1class Solution {
+2public:
+3    void backtrack(vector<int>& nums,vector<vector<int>>& res,int n,int i,vector<int>& sub){
+4        if(i==n){
+5            res.push_back(sub);
+6            return;
+7        }
+8        sub.push_back(nums[i]);
+9        backtrack(nums, res,n,i+1, sub);
+10        sub.pop_back();
+11        backtrack(nums, res, n, i+1,sub);
+12    }
+13    vector<vector<int>> subsets(vector<int>& nums) {
+14        vector<vector<int>> ans;
+15        vector<int> curr;
+16        int n = nums.size();
+17        backtrack(nums, ans , n, 0, curr);
+18        return ans;
+19    }
+20};
