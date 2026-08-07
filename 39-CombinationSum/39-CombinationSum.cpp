@@ -1,7 +1,7 @@
-// Last updated: 8/7/2026, 12:51:33 AM
+// Last updated: 8/7/2026, 3:49:45 PM
 1class Solution {
 2public:
-3    void solve(vector<int>& candidates,vector<vector<int>>& res,vector<int> curr, int target, int idx){
+3    void solve(vector<int>& candidates, vector<vector<int>>& res,vector<int>& curr,int target,int idx){
 4        int n=candidates.size();
 5        if(idx==n){
 6            if(target==0){
@@ -10,21 +10,16 @@
 9            return;
 10        }
 11        if(candidates[idx]<=target){
-12            //picking 
-13            curr.push_back(candidates[idx]);
-14            solve(candidates, res, curr, target-candidates[idx],idx);
-15            curr.pop_back();
-16        }
-17        //not pick
-18        
-19        solve(candidates, res, curr, target, idx+1);
-20
-21    }
-22    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-23        vector<vector<int>> res;
-24        vector<int> curr;
-25        int sum=target;
-26        solve(candidates, res, curr, target,0);
-27        return res;
-28    }
-29};
+12            curr.push_back(candidates[idx]);
+13            solve(candidates,res,curr,target-candidates[idx],idx);
+14            curr.pop_back();
+15        }
+16        solve(candidates,res,curr,target,idx+1);
+17    }
+18    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+19        vector<vector<int>> res;
+20        vector<int> curr;
+21        solve(candidates,res,curr,target,0);
+22        return res;
+23    }
+24};
