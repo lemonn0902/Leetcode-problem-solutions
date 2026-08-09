@@ -1,30 +1,37 @@
-// Last updated: 8/11/2025, 12:42:48 PM
-class Solution {
-public:
-    vector<vector<int>> fourSum(vector<int>& nums, int target) {
-        sort(nums.begin(), nums.end());
-        vector<vector<int>> res;
-        int n=nums.size();
-        for(int i=0;i<n;i++){
-            if(i>0 && nums[i]==nums[i-1]) continue;
-            for(int j=i+1;j<n;j++){
-                if(j>i+1 && nums[j]==nums[j-1]) continue;
-                int l=j+1;
-                int r=n-1;
-                while(l<r){
-                    long long sum=(long long)nums[i]+nums[j]+nums[l]+nums[r];
-                    if(sum==target){
-                        res.push_back({nums[i],nums[j], nums[l],nums[r]});
-                        l++;
-                        r--;
-                        while(l<r && nums[l]==nums[l-1]) l++;
-                        while(l<r && nums[r]==nums[r+1]) r--;
-                    }
-                    else if(sum<target) l++;
-                    else r--;
-                }
-            }
-        }
-        return res;
-    }
-};
+// Last updated: 8/10/2026, 12:36:05 AM
+1class Solution {
+2public:
+3
+4    int atMostK(vector<int>& nums, int k) {
+5        int left = 0;
+6        int right = 0;
+7        int count = 0;
+8
+9        unordered_map<int, int> mp;
+10
+11        while(right < nums.size()) {
+12
+13            mp[nums[right]]++;
+14
+15            while(mp.size() > k) {
+16                mp[nums[left]]--;
+17
+18                if(mp[nums[left]] == 0) {
+19                    mp.erase(nums[left]);
+20                }
+21
+22                left++;
+23            }
+24
+25            count += right - left + 1;
+26
+27            right++;
+28        }
+29
+30        return count;
+31    }
+32
+33    int subarraysWithKDistinct(vector<int>& nums, int k) {
+34        return atMostK(nums, k) - atMostK(nums, k - 1);
+35    }
+36};
