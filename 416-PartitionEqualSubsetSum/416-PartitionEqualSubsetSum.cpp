@@ -1,25 +1,24 @@
-// Last updated: 4/7/2026, 11:51:24 PM
+// Last updated: 8/12/2026, 1:24:21 PM
 1class Solution {
 2public:
-3    bool f(vector<int>& nums,int index, int target, vector<vector<int>>& dp){
-4        if(target==0) return true;
-5        if(index==0) return nums[index]==target;
-6        if(dp[index][target]!=-1) return dp[index][target];
-7        bool take=false;
-8        if(nums[index]<=target) take=f(nums,index-1, target-nums[index],dp);
-9        bool notTake=f(nums,index-1,target,dp);
-10        return dp[index][target]=take|notTake;
-11    }
-12    bool canPartition(vector<int>& nums) {
-13        int tot=0;
-14        int target=0;
-15        for(int i=0;i<nums.size();i++){
-16            tot+=nums[i];
-17        }
-18        target=tot/2;
-19        int n=nums.size();
-20        if(tot%2!=0) return false;
-21        vector<vector<int>> dp(n,vector<int>(target+1,-1));
-22        return f(nums,n-1,target,dp);
-23    }
-24};
+3    bool f(vector<int>& nums, vector<vector<int>>& dp, int idx, int target){
+4        int n=nums.size();
+5        if(target ==0) return true;
+6        if(idx==n) return false;
+7        if(dp[idx][target]!=-1) return dp[idx][target];
+8        bool take=false;
+9        if(nums[idx]<=target) take=f(nums,dp,idx+1,target-nums[idx]);
+10        bool noTake=f(nums,dp,idx+1,target);
+11        return dp[idx][target]=take|noTake;
+12    }
+13    bool canPartition(vector<int>& nums) {
+14        int totSum=0;
+15        int n=nums.size();
+16        for(int n:nums) totSum+=n;
+17        if(totSum%2!=0) return false;
+18        int target= totSum/2;
+19        vector<vector<int>> dp(n, vector<int>(target+1,-1));
+20        return f(nums,dp,0,target);
+21
+22    }
+23};
