@@ -1,24 +1,32 @@
-// Last updated: 8/12/2026, 1:24:21 PM
+// Last updated: 8/12/2026, 1:28:58 PM
 1class Solution {
 2public:
-3    bool f(vector<int>& nums, vector<vector<int>>& dp, int idx, int target){
-4        int n=nums.size();
-5        if(target ==0) return true;
-6        if(idx==n) return false;
-7        if(dp[idx][target]!=-1) return dp[idx][target];
-8        bool take=false;
-9        if(nums[idx]<=target) take=f(nums,dp,idx+1,target-nums[idx]);
-10        bool noTake=f(nums,dp,idx+1,target);
-11        return dp[idx][target]=take|noTake;
-12    }
-13    bool canPartition(vector<int>& nums) {
-14        int totSum=0;
-15        int n=nums.size();
-16        for(int n:nums) totSum+=n;
-17        if(totSum%2!=0) return false;
-18        int target= totSum/2;
-19        vector<vector<int>> dp(n, vector<int>(target+1,-1));
-20        return f(nums,dp,0,target);
-21
-22    }
-23};
+3    bool f(vector<int>& nums, int target, vector<vector<int>>& dp, int idx) {
+4
+5        int n = nums.size();
+6        if (target == 0)
+7            return true;
+8        if (idx >= n || target < 0)
+9            return false;
+10        if (dp[idx][target] != -1)
+11            return dp[idx][target];
+12        bool notake = f(nums, target, dp, idx + 1);
+13        bool take = false;
+14        if (nums[idx] <= target) {
+15            take = f(nums, target - nums[idx], dp, idx + 1);
+16        }
+17        return dp[idx][target] = (take || notake);
+18    }
+19
+20    bool canPartition(vector<int>& nums) {
+21        int tot = 0;
+22        for (int x : nums)
+23            tot += x;
+24        if (tot % 2 != 0)
+25            return false;
+26        int target = tot / 2;
+27        int n = nums.size();
+28        vector<vector<int>> dp(n, vector<int>(target + 1, -1));
+29        return f(nums, target, dp, 0);
+30    }
+31};
