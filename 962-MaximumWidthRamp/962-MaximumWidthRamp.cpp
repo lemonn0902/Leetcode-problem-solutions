@@ -1,22 +1,28 @@
-// Last updated: 8/16/2026, 12:48:04 AM
+// Last updated: 8/16/2026, 2:39:17 PM
 1class Solution {
 2public:
-3    int maxWidthRamp(vector<int>& nums) {
-4        stack<int> st;
-5        int n=nums.size();
-6        for(int i=0;i<n;i++){
-7            if(st.empty()||nums[st.top()]>nums[i]){
-8                st.push(i);
-9            }
-10        }
-11        int ans =0;
-12        for(int j=n-1;j>=0;j--){
-13            while (!st.empty() && nums[st.top()] <= nums[j]) {
-14                ans=max(ans, j-st.top());
-15                st.pop();
-16            }
-17
-18        }
-19        return ans;
-20    }
-21};
+3    int largestRectangleArea(vector<int>& heights) {
+4        stack<pair<int,int>> st; //index, no
+5        int n=heights.size();
+6        int maxi=INT_MIN;
+7        for(int i=0;i<n;i++){
+8            int start=i;
+9            while(!st.empty() && heights[i]<st.top().second){
+10                int idx= st.top().first;
+11                int h=st.top().second;
+12                st.pop();
+13                maxi=max(maxi, h*(i-idx));
+14                start=idx;
+15            }
+16            st.push({start, heights[i]});
+17        }
+18        while (!st.empty()) {
+19            int index = st.top().first;
+20            int height = st.top().second;
+21            st.pop();
+22
+23            maxi = max(maxi, height * (n - index));
+24        }
+25        return maxi;
+26    }
+27};
