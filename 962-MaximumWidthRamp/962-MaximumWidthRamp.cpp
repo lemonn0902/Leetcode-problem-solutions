@@ -1,27 +1,19 @@
-// Last updated: 8/16/2026, 4:33:29 PM
+// Last updated: 8/16/2026, 7:09:59 PM
 1class Solution {
 2public:
-3    int largestRectangleArea(vector<int>& heights) {
-4        stack<pair<int,int>> st; //idx, no
-5        int maxi=INT_MIN;
-6        for(int i=0;i<heights.size();i++){
-7            int start=i;
-8            while(!st.empty() && heights[i]<st.top().second){
-9                int idx=st.top().first;
-10                int h=st.top().second;
-11                st.pop();
-12                maxi=max(maxi, h*(i-idx));
-13                start=idx;
-14            }
-15            st.push({start, heights[i]});
-16        }
-17        int n =heights.size();
-18        while(!st.empty()){
-19            int h=st.top().second;
-20            int i=st.top().first;
-21            st.pop();
-22            maxi=max(maxi, h*(n-i));
-23        }
-24        return maxi;
-25    }
-26};
+3    int numRescueBoats(vector<int>& people, int limit) {
+4        int ans=0;
+5        sort(people.begin(), people.end());
+6        int l=0;
+7        int r=people.size()-1;
+8        while(l<=r){
+9            ans++;
+10            if(people[l]+people[r]<=limit){
+11                l++;
+12                r--;
+13            }
+14            else r--;
+15        }
+16        return ans;
+17    }
+18};
