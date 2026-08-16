@@ -1,20 +1,32 @@
-// Last updated: 8/16/2026, 1:10:16 AM
-1class Solution {
-2public:
-3    int f(vector<int>& nums, vector<vector<int>>& dp, int i, int prev){
-4        int n = nums.size();
-5        if(i==n) return 0;
-6        if(dp[i][prev+1]!=-1) return dp[i][prev+1];
-7        int notake=f(nums,dp,i+1,prev);
-8        int take=0;
-9        if(prev==-1||nums[i]>nums[prev]){
-10            take=1+f(nums,dp,i+1,i);
-11        }
-12        return dp[i][prev+1]=max(take, notake);
-13    }
-14    int lengthOfLIS(vector<int>& nums) {
-15        int n=nums.size();
-16        vector<vector<int>> dp(n,vector<int>(n+1,-1));
-17        return f(nums, dp, 0,-1);
-18    }
-19};
+// Last updated: 8/16/2026, 4:23:54 PM
+1/**
+2 * Definition for singly-linked list.
+3 * struct ListNode {
+4 *     int val;
+5 *     ListNode *next;
+6 *     ListNode() : val(0), next(nullptr) {}
+7 *     ListNode(int x) : val(x), next(nullptr) {}
+8 *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+9 * };
+10 */
+11class Solution {
+12public:
+13    ListNode* mergeKLists(vector<ListNode*>& lists) {
+14        priority_queue<pair<int,ListNode*> , vector<pair<int,ListNode*>>, greater<>> pq;
+15        for(auto it:lists){
+16            if(it) pq.push({it->val, it});
+17        }
+18        ListNode dummy(0);
+19        ListNode* temp=&dummy;
+20        while(!pq.empty()){
+21            auto [val, node]= pq.top();
+22            pq.pop();
+23            temp->next=node;
+24            temp=temp->next;
+25            if(node->next){
+26                pq.push({node->next->val,node->next});
+27            }
+28        }
+29        return dummy.next;
+30    }
+31};
